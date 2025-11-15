@@ -1,0 +1,68 @@
+RewriteEngine On
+RewriteBase /
+
+# ---------------------------
+# Force HTTPS (works behind proxies too)
+# ---------------------------
+# If HTTPS is not on and X-Forwarded-Proto isn't https, redirect to https
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ---------------------------
+# Force www removal (canonical host)
+# ---------------------------
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# ---------------------------
+# Remove trailing slash for non-files/non-directories (canonicalize URLs)
+# Example: /contact-us/  ->  https://prepphint.com/contact-us
+# ---------------------------
+# Don't apply to root
+RewriteCond %{REQUEST_URI} !^/$
+# Only when requested path is NOT an existing directory or file
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+# Redirect to canonical host without trailing slash
+RewriteRule ^(.+?)/$ https://prepphint.com/$1 [R=301,L]
+
+# ---------------------------
+# Security headers
+# ---------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ---------------------------
+# Compression
+# ---------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# ---------------------------
+# No browser caching (removed per request)
+# ---------------------------
+
+# ---------------------------
+# Internally rewrite pretty URLs to HTML (only if file/dir doesn't exist)
+# ---------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^about-us$ about-us.html [L]
+RewriteRule ^contact-us$ contact-us.html [L]
+RewriteRule ^privacy-policy$ privacy-policy.html [L]
+RewriteRule ^terms-and-conditions$ terms-and-conditions.html [L]
