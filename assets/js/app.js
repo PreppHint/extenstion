@@ -89,7 +89,7 @@ async function loadExtensions() {
     const container = document.getElementById('extensions-container');
     
     try {
-        const response = await fetch('data/extensions.json');
+        const response = await fetch('https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.json');
         
         if (!response.ok) {
             throw new Error('Failed to load extensions data');
@@ -158,3 +158,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Log that extensions are loaded
     console.log('Extension cards loaded - use individual browser buttons to download');
 });
+
