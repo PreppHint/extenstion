@@ -88,14 +88,24 @@ function generateExtensionCard(extension) {
 async function loadExtensions() {
     const container = document.getElementById('extensions-container');
     
-    try {
-        const response = await fetch('https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.json');
-        
-        if (!response.ok) {
-            throw new Error('Failed to load extensions data');
-        }
-        
-        const data = await response.json();
+    // Try multiple CDN URLs as fallback (no local fallback for Blogger)
+    const urls = [
+        'https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.json',
+        'https://raw.githubusercontent.com/PreppHint/extenstion/main/data/extensions.json'
+    ];
+    
+    let lastError = null;
+    
+    for (const url of urls) {
+        try {
+            console.log('Attempting to load from:', url);
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
         
         if (!data.extensions || data.extensions.length === 0) {
             container.innerHTML = '<div class="alert alert-info">No extensions available at the moment.</div>';
@@ -109,14 +119,23 @@ async function loadExtensions() {
         });
         
         container.innerHTML = html;
-        
-        // Add structured data for SEO
-        addStructuredData(data.extensions);
-        
-    } catch (error) {
-        console.error('Error loading extensions:', error);
-        container.innerHTML = '<div class="alert alert-danger">Failed to load extensions. Please try again later.</div>';
+            
+            // Add structured data for SEO
+            addStructuredData(data.extensions);
+            
+            // Success - exit the loop
+            return;
+            
+        } catch (error) {
+            console.error(`Failed to load from ${url}:`, error);
+            lastError = error;
+            // Continue to next URL
+        }
     }
+    
+    // If all URLs failed
+    console.error('All extension loading attempts failed:', lastError);
+    container.innerHTML = '<div class="alert alert-danger">Failed to load extensions. Please try again later.</div>';
 }
 
 // Add structured data for SEO
@@ -158,4 +177,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Log that extensions are loaded
     console.log('Extension cards loaded - use individual browser buttons to download');
 });
-
