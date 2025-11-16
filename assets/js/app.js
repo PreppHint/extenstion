@@ -84,19 +84,31 @@ function generateExtensionCard(extension) {
     return html;
 }
 
-// Load extensions from CDN
+// Load extensions - data is already loaded from CDN script tag
 async function loadExtensions() {
     const container = document.getElementById('extensions-container');
     
     try {
-        console.log('Loading extensions from CDN');
-        const response = await fetch('https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.json');
+        // Extensions data is loaded via script tag in blogger-theme.xml
+        // The JSON file should be wrapped as: window.EXTENSIONS_DATA = {...}
+        // Or we fetch it if not available
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        let data;
+        
+        if (window.EXTENSIONS_DATA) {
+            console.log('Using extensions data from CDN script tag');
+            data = window.EXTENSIONS_DATA;
+        } else {
+            // Fallback: fetch if script tag didn't work
+            console.log('Fetching extensions from CDN');
+            const response = await fetch('https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.json');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            data = await response.json();
         }
-        
-        const data = await response.json();
         
         if (!data.extensions || data.extensions.length === 0) {
             container.innerHTML = '<div class="alert alert-info">No extensions available at the moment.</div>';
@@ -114,7 +126,7 @@ async function loadExtensions() {
         // Add structured data for SEO
         addStructuredData(data.extensions);
         
-        console.log(`Successfully loaded ${data.extensions.length} extensions from CDN`);
+        console.log(`Successfully loaded ${data.extensions.length} extensions`);
         
     } catch (error) {
         console.error('Error loading extensions:', error);
