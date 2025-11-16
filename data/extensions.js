@@ -1,4 +1,5 @@
-{
+// Extensions data for PreppHint
+window.EXTENSIONS_DATA = {
   "extensions": [
     {
       "id": "activate-enable-right-click",
@@ -81,4 +82,4 @@
       "edge_url": "#"
     }
   ]
-}
+};
