@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+    <meta expr:content='&quot;text/html; charset=&quot; + data:blog.encoding' http-equiv='Content-Type'/>
+    <meta content='width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes' name='viewport'/>
+    <title><data:view.title.escaped/></title>
+    <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' type='image/x-icon'/>
+    <link expr:href='data:view.url.canonical' rel='canonical'/>
+    <meta expr:content='data:view.description.escaped' name='description'/>
+    
+    <b:skin><![CDATA[
+    /* Minimal CSS */
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    .navbar { height: 75px !important; padding: 0 !important; margin: 0 !important; }
+    
+    /* Privacy Policy Popup Styles */
+    .privacy-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9998;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .privacy-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 900px;
+        max-height: 85vh;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+    }
+    
+    .privacy-popup-header {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .privacy-popup-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .privacy-close-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        line-height: 1;
+        padding: 0;
+    }
+    
+    .privacy-close-btn:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    
+    .privacy-popup-content {
+        padding: 25px;
+        overflow-y: auto;
+        max-height: calc(85vh - 80px);
+    }
+    
+    .privacy-popup-content h2 {
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #11998e;
+        padding-bottom: 8px;
+    }
+    
+    .privacy-popup-content h3 {
+        color: #555;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .privacy-popup-content p {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    
+    .privacy-popup-content ul {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        padding-left: 25px;
+    }
+    
+    .privacy-popup-content ul li {
+        margin-bottom: 8px;
+    }
+    
+    .privacy-popup-content a {
+        color: #11998e;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .privacy-popup-content a:hover {
+        text-decoration: underline;
+    }
+    
+    .privacy-popup-content strong {
+        color: #333;
+    }
+    
+    .privacy-popup.active,
+    .privacy-overlay.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -48%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+    
+    /* Scrollbar styling for popup content */
+    .privacy-popup-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .privacy-popup-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .privacy-popup-content::-webkit-scrollbar-thumb {
+        background: #11998e;
+        border-radius: 10px;
+    }
+    
+    .privacy-popup-content::-webkit-scrollbar-thumb:hover {
+        background: #38ef7d;
+    }
+    
+    @media (max-width: 768px) {
+        .privacy-popup {
+            width: 95%;
+            max-height: 90vh;
+        }
+        
+        .privacy-popup-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .privacy-popup-content {
+            padding: 20px;
+            max-height: calc(90vh - 70px);
+        }
+        
+        .privacy-popup-content h2 {
+            font-size: 1.2rem;
+        }
+        
+        .privacy-popup-content h3 {
+            font-size: 1rem;
+        }
+    }
+    
+    /* Terms and Conditions Popup Styles */
+    .terms-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9998;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .terms-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 900px;
+        max-height: 85vh;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+    }
+    
+    .terms-popup-header {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .terms-popup-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .terms-close-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        line-height: 1;
+        padding: 0;
+    }
+    
+    .terms-close-btn:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    
+    .terms-popup-content {
+        padding: 25px;
+        overflow-y: auto;
+        max-height: calc(85vh - 80px);
+    }
+    
+    .terms-popup-content h2 {
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #11998e;
+        padding-bottom: 8px;
+    }
+    
+    .terms-popup-content h3 {
+        color: #555;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .terms-popup-content p {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    
+    .terms-popup-content ul {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        padding-left: 25px;
+    }
+    
+    .terms-popup-content ul li {
+        margin-bottom: 8px;
+    }
+    
+    .terms-popup-content a {
+        color: #11998e;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .terms-popup-content a:hover {
+        text-decoration: underline;
+    }
+    
+    .terms-popup-content strong {
+        color: #333;
+    }
+    
+    .terms-popup.active,
+    .terms-overlay.active {
+        display: block;
+    }
+    
+    .terms-popup-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .terms-popup-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .terms-popup-content::-webkit-scrollbar-thumb {
+        background: #11998e;
+        border-radius: 10px;
+    }
+    
+    .terms-popup-content::-webkit-scrollbar-thumb:hover {
+        background: #38ef7d;
+    }
+    
+    @media (max-width: 768px) {
+        .terms-popup {
+            width: 95%;
+            max-height: 90vh;
+        }
+        
+        .terms-popup-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .terms-popup-content {
+            padding: 20px;
+            max-height: calc(90vh - 70px);
+        }
+        
+        .terms-popup-content h2 {
+            font-size: 1.2rem;
+        }
+        
+        .terms-popup-content h3 {
+            font-size: 1rem;
+        }
+    }
+    
+    /* Contact Us Popup Styles */
+    .contact-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9998;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .contact-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 800px;
+        max-height: 85vh;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+    }
+    
+    .contact-popup-header {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .contact-popup-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .contact-close-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        line-height: 1;
+        padding: 0;
+    }
+    
+    .contact-close-btn:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    
+    .contact-popup-content {
+        padding: 25px;
+        overflow-y: auto;
+        max-height: calc(85vh - 80px);
+    }
+    
+    .contact-popup-content h2 {
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .contact-popup-content p {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    
+    .contact-popup-content a {
+        color: #11998e;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .contact-popup-content a:hover {
+        text-decoration: underline;
+    }
+    
+    .contact-info-box {
+        background: #f8f9fa;
+        border-left: 4px solid #11998e;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+    
+    .contact-info-box h5 {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .contact-info-box i {
+        color: #11998e;
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .contact-info-box p {
+        margin: 0;
+        color: #666;
+    }
+    
+    .contact-social-links {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .contact-social-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #11998e;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-social-btn:hover {
+        background: #38ef7d;
+        transform: translateY(-2px);
+        color: white;
+    }
+    
+    .contact-popup.active,
+    .contact-overlay.active {
+        display: block;
+    }
+    
+    .contact-popup-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .contact-popup-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .contact-popup-content::-webkit-scrollbar-thumb {
+        background: #11998e;
+        border-radius: 10px;
+    }
+    
+    .contact-popup-content::-webkit-scrollbar-thumb:hover {
+        background: #38ef7d;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-popup {
+            width: 95%;
+            max-height: 90vh;
+        }
+        
+        .contact-popup-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .contact-popup-content {
+            padding: 20px;
+            max-height: calc(90vh - 70px);
+        }
+        
+        .contact-popup-content h2 {
+            font-size: 1.2rem;
+        }
+    }
+    
+    /* About Us Popup Styles */
+    .about-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9998;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .about-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 900px;
+        max-height: 85vh;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+    }
+    
+    .about-popup-header {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .about-popup-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .about-close-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        line-height: 1;
+        padding: 0;
+    }
+    
+    .about-close-btn:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    
+    .about-popup-content {
+        padding: 25px;
+        overflow-y: auto;
+        max-height: calc(85vh - 80px);
+    }
+    
+    .about-popup-content h2 {
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #11998e;
+        padding-bottom: 8px;
+    }
+    
+    .about-popup-content p {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    
+    .about-popup-content a {
+        color: #11998e;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .about-popup-content a:hover {
+        text-decoration: underline;
+    }
+    
+    .about-popup-content strong {
+        color: #333;
+    }
+    
+    .about-founder-section {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .about-founder-image {
+        flex-shrink: 0;
+    }
+    
+    .about-founder-image img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #11998e;
+    }
+    
+    .about-founder-content {
+        flex: 1;
+    }
+    
+    .about-founder-content h3 {
+        color: #11998e;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .about-popup.active,
+    .about-overlay.active {
+        display: block;
+    }
+    
+    .about-popup-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .about-popup-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .about-popup-content::-webkit-scrollbar-thumb {
+        background: #11998e;
+        border-radius: 10px;
+    }
+    
+    .about-popup-content::-webkit-scrollbar-thumb:hover {
+        background: #38ef7d;
+    }
+    
+    @media (max-width: 768px) {
+        .about-popup {
+            width: 95%;
+            max-height: 90vh;
+        }
+        
+        .about-popup-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .about-popup-content {
+            padding: 20px;
+            max-height: calc(90vh - 70px);
+        }
+        
+        .about-popup-content h2 {
+            font-size: 1.2rem;
+        }
+        
+        .about-founder-section {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .about-founder-image img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+    ]]></b:skin>
+
+    
+    <!-- External CSS -->
+    <link crossorigin='anonymous' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' integrity='sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM' rel='stylesheet'/>
+    <link crossorigin='anonymous' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css' integrity='sha384-l4UPAMHGzl7zwogLW4nOwaU2XTk6oiM1jhCRQstZEndoIiA2I5bg6fST3wzBSRBD' rel='stylesheet'/>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+    
+    <!-- Custom CSS -->
+    <link href='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/assets/css/main.css' rel='stylesheet'/>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <header id='header'>
+        <nav class='navbar navbar-expand-lg navbar-light bg-white border-bottom'>
+            <div class='container'>
+                <a aria-label='PreppHint Home - Free Browser Extensions' class='navbar-brand d-flex align-items-center' href='/' title='PreppHint - Free Browser Extensions for Chrome and Edge'>
+                    <img alt='PreppHint Logo - Your Browser Extensions Hub for Chrome and Edge' height='48' loading='eager' src='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/images/prepphintmainlogo.svg' width='auto'/>
+                </a>
+                <button aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation' class='navbar-toggler' data-bs-target='#navbarSupportedContent' data-bs-toggle='collapse' type='button'>
+                    <span class='navbar-toggler-icon'/>
+                </button>
+                <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                    <ul class='navbar-nav ms-auto mb-2 mb-lg-0 align-items-center'>
+                        <li class='nav-item'>
+                            <a aria-label='Visit PreppHint on GitHub' class='nav-link py-2 px-3' href='https://github.com/PreppHint' rel='noopener noreferrer' target='_blank' title='PreppHint GitHub Repository'>
+                                <svg aria-hidden='true' fill='#000000' height='24' role='img' viewBox='0 0 24 24' width='24'>
+                                    <title>GitHub</title>
+                                    <path d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class='nav-item'>
+                            <a aria-label='Connect with PreppHint creator on LinkedIn' class='nav-link py-2 px-3' href='https://www.linkedin.com/in/amureborn' rel='noopener noreferrer' target='_blank' title='Aman Kumar LinkedIn Profile'>
+                                <svg aria-hidden='true' fill='#0077B5' height='24' role='img' viewBox='0 0 24 24' width='24'>
+                                    <title>LinkedIn</title>
+                                    <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT SECTION -->
+    <main class='container my-4' role='main'>
+        <b:section class='main-section' id='main' maxwidgets='10' showaddelement='yes'/>
+        
+          <!-- PROMO SECTION -->
+          <section aria-label='Featured App - TaskCo' class='bg-white border-bottom shadow-sm py-3 px-3 rounded-4 mb-4' itemscope='itemscope' itemtype='https://schema.org/SoftwareApplication'>
+              <div class='row g-3 align-items-center'>
+                  <div class='col-12 col-sm-auto text-center text-sm-start'>
+                      <img alt='TaskCo App Icon - Productivity and task management application with to-do lists and reminders' class='img-fluid rounded-3' height='120' itemprop='image' loading='lazy' src='https://play-lh.googleusercontent.com/pjAUIuN-p1smbNFFyKK8dq1xXEXBOOq1k80_NYCXMcN-uwdKuP0FmL97hiV45tZ3Gg=w240-h480-rw' width='120'/>
+                  </div>
+                  <div class='col-12 col-sm'>
+                      <div class='d-flex align-items-center gap-2 mb-2 justify-content-center justify-content-sm-start'>
+                          <h2 class='fw-bold text-dark mb-0 fs-5 text-center text-sm-start' itemprop='name'>TaskCo: To Do List &amp; Reminders</h2>
+                      </div>
+                      <p class='text-body-secondary mb-2 small text-center text-sm-start' itemprop='description'>
+                          TaskCo is a beautifully designed productivity app that helps you manage your tasks, set daily reminders, and track your habits - all in one place. Whether it&#39;s remembering to drink water, take medication, or track your workouts, TaskCo keeps your day on track with ease and style.
+                          <span class='badge bg-success-subtle text-success ms-1'>#Productivity</span>
+                          <span class='badge bg-info-subtle text-info ms-1'>#To-do lists</span>
+                      </p>
+                      <meta content='Android' itemprop='operatingSystem'/>
+                      <meta content='Productivity' itemprop='applicationCategory'/>
+                      <div itemprop='offers' itemscope='itemscope' itemtype='https://schema.org/Offer'>
+                        <meta content='0' itemprop='price'/>
+                        <meta content='USD' itemprop='priceCurrency'/>
+                      </div>
+                      <div class='text-center text-sm-start'>
+                          <a aria-label='Download TaskCo from Google Play Store' class='btn btn-primary btn-sm d-inline-flex align-items-center gap-2 text-white fw-semibold px-3 py-2' href='https://play.google.com/store/apps/details?id=com.melodicvista.taskco' itemprop='url' rel='noopener noreferrer' target='_blank' title='Get TaskCo on Google Play Store'>
+                              <svg aria-hidden='true' class='bi bi-google-play' fill='currentColor' height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'>
+                                  <path d='M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8.235l3.2 3.2 2.702-1.586zm-3.595 2.116L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055l7.294-4.295zM1 13.396V2.603c0-.404.223-.768.577-.96L8.32 8.235 1.577 14.356A1.06 1.06 0 0 1 1 13.396zM8.32 8.235l3.208-3.195L4.234 1.745c-.943-.555-2.102.026-2.303 1.055l6.389 5.435z'/>
+                              </svg>
+                              Get on Play Store
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <!-- BROWSER EXTENSIONS SECTION -->
+          <section aria-labelledby='extensions-heading' class='mb-5' itemscope='itemscope' itemtype='https://schema.org/ItemList'>
+              <h2 class='fw-bold fs-3 mb-4' id='extensions-heading' itemprop='name'>Our Browser Extensions</h2>
+              <meta content='Free browser extensions for Chrome and Microsoft Edge' itemprop='description'/>
+              <div class='tools-grid' id='extensions-container' itemprop='itemListElement'>
+                  <!-- Extensions will be loaded here by JavaScript -->
+                  <div aria-live='polite' class='text-center py-5'>
+                      <div class='spinner-border text-primary' role='status'>
+                          <span class='visually-hidden'>Loading extensions...</span>
+                      </div>
+                  </div>
+              </div>
+          </section>
+    </main>
+    <!-- FOOTER SECTION -->
+    <footer id='footer'>
+        <b:section class='footer-section' id='footer-widgets' maxwidgets='10' showaddelement='yes'/>
+        
+        <!-- Main Footer -->
+        <section aria-label='Footer Information' class='footers'>
+            <div class='container'>
+                <div class='row justify-content-center'>
+                    <div class='col-md-10 text-start text-md-center'>
+                        <div class='footers-logo'>
+                            <a aria-label='PreppHint Home' class='text-decoration-none' href='/' title='PreppHint - Free Browser Extensions'>
+                                <img alt='PreppHint Logo - Browser Extensions Platform' height='50' loading='lazy' src='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/images/prepphintmainlogo.svg' width='auto'/>
+                            </a>
+                        </div>
+                        <div class='footers-info mt-3'>
+                            <p>Our browser extensions are easy to use, free, and designed to improve your online experience. At PreppHint, you&#39;ll find detailed information, features, and guides about each extension published on the Chrome Web Store and Microsoft Edge!</p>
+                        </div>
+                        <nav aria-label='Footer Navigation'>
+                            <h3 class='d-block d-md-none fw-bold mb-3 h5'>Quick Links</h3>
+                            <ul class='list-unstyled nav-links d-flex flex-column flex-md-row justify-content-start justify-content-md-center'>
+                                <li class='mx-0 mx-md-3 mb-2 mb-md-0'><a aria-label='Learn About PreppHint' class='fw-bold text-decoration-none about-us-link' href='#about' onclick='openAboutPopup(); return false;' title='About PreppHint'>About Us</a></li>
+                                <li class='mx-0 mx-md-3 mb-2 mb-md-0'><a aria-label='Contact PreppHint Support' class='fw-bold text-decoration-none contact-us-link' href='#contact' onclick='openContactPopup(); return false;' title='Contact PreppHint'>Contact Us</a></li>
+                                <li class='mx-0 mx-md-3 mb-2 mb-md-0'><a aria-label='Read Privacy Policy' class='fw-bold text-decoration-none privacy-policy-link' href='#privacy' onclick='openPrivacyPopup(); return false;' title='PreppHint Privacy Policy'>Privacy Policy</a></li>
+                                <li class='mx-0 mx-md-3 mb-2 mb-md-0'><a aria-label='Read Terms and Conditions' class='fw-bold text-decoration-none terms-conditions-link' href='#terms' onclick='openTermsPopup(); return false;' title='PreppHint Terms and Conditions'>Terms and Conditions</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class='container'>
+            <div aria-label='Privacy and Security Disclaimer' class='bg-white text-dark rounded p-3 border border-secondary'>
+                <div class='row'>
+                    <div class='col-12'>
+                        <small>
+                            <strong>Disclaimer:</strong> We care about your privacy and security. Most of our browser extensions are free and run entirely on your device, ensuring that none of your data is uploaded to our servers. This approach keeps your information private and secure. All the data you input is processed locally and encrypted, safeguarding it from unauthorized access. Our browser extensions ensures your data stays safe and private at all times by operating entirely on your device without transmitting any information to our servers. Your privacy is our top priority.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        </section>
+
+        <!-- Footer Bottom -->
+        <div class='container mb-3'>
+            <div class='row align-items-center'>
+                <div class='col-md-6 text-center text-md-start'>
+                    <p class='mb-0'>&#169; <time datetime='2025'>2025</time> PreppHint.Com | All rights reserved.</p>
+                </div>
+                <div class='col-md-6 text-center text-md-end'>
+                    <p class='mb-0'>
+                        Designed by 
+                        <a aria-label='Visit aanchal.ai on Instagram' class='text-primary text-decoration-none fw-bold' href='https://www.instagram.com/aanchal.ai/' rel='noopener noreferrer' target='_blank' title='aanchal.ai Instagram Profile'>aanchal.ai</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Privacy Policy Popup -->
+    <div aria-hidden='true' class='privacy-overlay' id='privacyOverlay' onclick='closePrivacyPopup()'/>
+    <div aria-labelledby='privacy-title' aria-modal='true' class='privacy-popup' id='privacyPopup' role='dialog'>
+        <div class='privacy-popup-header'>
+            <h2 id='privacy-title'>Privacy Policy</h2>
+            <button aria-label='Close Privacy Policy' class='privacy-close-btn' onclick='closePrivacyPopup()' type='button'>&#215;</button>
+        </div>
+        <div class='privacy-popup-content'>
+            <p><strong>Last Updated:</strong> November 12, 2025</p>
+            <p class='lead'>At PrepHint, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our website and services.</p>
+            
+            <h2>Information We Collect</h2>
+            <h3>Personal Information</h3>
+            <p>When you use our contact form, we collect the following information:</p>
+            <ul>
+                <li>Your name</li>
+                <li>Email address</li>
+                <li>Any information you provide in the message body</li>
+            </ul>
+            
+            <h3>Automatically Collected Information</h3>
+            <p>We automatically collect certain information when you visit our website:</p>
+            <ul>
+                <li>IP address</li>
+                <li>Browser type and version</li>
+                <li>Operating system</li>
+                <li>Referring website</li>
+                <li>Pages you view on our site</li>
+                <li>Time and date of your visit</li>
+            </ul>
+            
+            <h3>Cookies and Similar Technologies</h3>
+            <p>We use cookies and similar tracking technologies to enhance your experience on our website. Cookies are small files that are stored on your device when you visit a website. We use cookies for the following purposes:</p>
+            <ul>
+                <li>To analyze website traffic and usage patterns through Google Analytics</li>
+                <li>To remember your preferences and settings</li>
+                <li>To improve website functionality and user experience</li>
+            </ul>
+            <p>You can control cookies through your browser settings. Most browsers allow you to refuse or accept cookies and to delete them. However, if you disable cookies, some features of our website may not function properly.</p>
+            
+            <h2>How We Use Your Information</h2>
+            <p>We use the information we collect for the following purposes:</p>
+            <ul>
+                <li>To respond to your inquiries and provide customer support</li>
+                <li>To improve our website and services</li>
+                <li>To analyze website usage and trends</li>
+                <li>To protect the security and integrity of our website</li>
+                <li>To comply with legal obligations</li>
+            </ul>
+            
+            <h2>Data Security</h2>
+            <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, please note that no method of transmission over the internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
+            
+            <h2>Your Rights</h2>
+            <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+            <ul>
+                <li>The right to access and receive a copy of your personal information</li>
+                <li>The right to rectify or update your personal information</li>
+                <li>The right to delete your personal information</li>
+                <li>The right to restrict or object to the processing of your personal information</li>
+                <li>The right to data portability</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us using our <a href='#contact' onclick='closePrivacyPopup(); openContactPopup(); return false;' title='Contact PreppHint'>Contact Us</a> page.</p>
+            
+            <h2>Children&#39;s Privacy</h2>
+            <p>Our website and services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we can take necessary actions.</p>
+            
+            <h2>Changes to This Privacy Policy</h2>
+            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Last Updated&quot; date at the top. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+            
+            <h2>Contact Us</h2>
+            <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us through our <a href='#contact' onclick='closePrivacyPopup(); openContactPopup(); return false;' title='Contact PreppHint'>Contact Us</a> page.</p>
+        </div>
+    </div>
+    <!-- Terms and Conditions Popup -->
+    <div aria-hidden='true' class='terms-overlay' id='termsOverlay' onclick='closeTermsPopup()'/>
+    <div aria-labelledby='terms-title' aria-modal='true' class='terms-popup' id='termsPopup' role='dialog'>
+        <div class='terms-popup-header'>
+            <h2 id='terms-title'>Terms and Conditions</h2>
+            <button aria-label='Close Terms and Conditions' class='terms-close-btn' onclick='closeTermsPopup()' type='button'>&#215;</button>
+        </div>
+        <div class='terms-popup-content'>
+            <p class='lead'>Welcome to PrepHint. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully before using our services.</p>
+            <p><strong>Last Updated:</strong> November 12, 2025</p>
+            
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing or using PrepHint.com, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website or services.</p>
+            <p>We reserve the right to modify these terms at any time without notice. Your continued use of our website after any changes to these terms constitutes your acceptance of the revised terms.</p>
+            
+            <h2>Use of Services</h2>
+            <h3>General Use</h3>
+            <p>You agree to use our services only for lawful purposes and in accordance with these Terms and Conditions. You agree not to use our services:</p>
+            <ul>
+                <li>In any way that violates any applicable federal, state, local, or international law or regulation</li>
+                <li>To engage in any conduct that restricts or inhibits anyone&#39;s use or enjoyment of the services</li>
+                <li>To exploit the services or collect information from the services using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior written permission</li>
+                <li>To attempt to gain unauthorized access to any portion of the services, or any systems or networks connected to the services</li>
+            </ul>
+            
+            <h3>User Responsibilities</h3>
+            <p>When using our services, you are responsible for:</p>
+            <ul>
+                <li>Ensuring that your use of the services complies with all applicable laws and regulations</li>
+                <li>Maintaining the confidentiality of any account information or passwords</li>
+                <li>All activities that occur under your account or from your IP address</li>
+            </ul>
+            
+            <h2>Intellectual Property</h2>
+            <p>The content, organization, graphics, design, compilation, and other matters related to our website are protected under applicable copyrights, trademarks, and other proprietary (including but not limited to intellectual property) rights. Copying, redistribution, use, or publication by you of any such matters or any part of our website is strictly prohibited without our express prior written permission.</p>
+            <p>You do not acquire ownership rights to any content, document, or other materials viewed through our website. The posting of information or materials on our website does not constitute a waiver of any right in such information and materials.</p>
+            
+            <h2>User Content</h2>
+            <p>Some features of our services may allow you to upload, submit, store, send, or receive content. You retain ownership of any intellectual property rights that you hold in that content. When you upload, submit, store, send, or receive content through our services, you give us a worldwide license to use, host, store, reproduce, modify, create derivative works, communicate, publish, publicly perform, publicly display, and distribute such content.</p>
+            <p>You represent and warrant that:</p>
+            <ul>
+                <li>You own or control all rights to the content you submit</li>
+                <li>The content does not infringe, violate, or misappropriate any third-party right</li>
+                <li>The content complies with all applicable laws and regulations</li>
+            </ul>
+            
+            <h2>Disclaimer of Warranties</h2>
+            <p>OUR SERVICES ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.</p>
+            <p>WE DO NOT WARRANT THAT OUR SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT OUR WEBSITE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. WE DO NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF OUR SERVICES IN TERMS OF THEIR CORRECTNESS, ACCURACY, RELIABILITY, OR OTHERWISE.</p>
+            
+            <h2>Limitation of Liability</h2>
+            <p>IN NO EVENT SHALL WE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:</p>
+            <ul>
+                <li>YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE OUR SERVICES</li>
+                <li>ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON OUR SERVICES</li>
+                <li>ANY CONTENT OBTAINED FROM OUR SERVICES</li>
+                <li>UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT</li>
+            </ul>
+            
+            <h2>Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless PrepHint, its officers, directors, employees, agents, and third parties, for any losses, costs, liabilities, and expenses (including reasonable attorney&#39;s fees) relating to or arising out of your use of our services, including but not limited to any breach of these Terms and Conditions, any content posted by you, or your violation of any law or the rights of a third party.</p>
+            
+            <h2>External Links</h2>
+            <p>Our website may contain links to external websites that are not provided or maintained by or in any way affiliated with PrepHint. Please note that we do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</p>
+            
+            <h2>Governing Law</h2>
+            <p>These Terms and Conditions shall be governed and construed in accordance with the laws applicable in the country where PrepHint is registered, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms and Conditions will not be considered a waiver of those rights.</p>
+            
+            <h2>Severability</h2>
+            <p>If any provision of these Terms and Conditions is held to be invalid or unenforceable by a court, the remaining provisions will continue to be in effect. These Terms and Conditions constitute the entire agreement between us regarding our services and supersede and replace any prior agreements we might have had regarding the services.</p>
+            
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, please contact us through our <a href='#contact' onclick='openContactPopup(); return false;' title='Contact PreppHint'>Contact Us</a> page.</p>
+        </div>
+    </div>
+    <!-- Contact Us Popup -->
+    <div aria-hidden='true' class='contact-overlay' id='contactOverlay' onclick='closeContactPopup()'/>
+    <div aria-labelledby='contact-title' aria-modal='true' class='contact-popup' id='contactPopup' role='dialog'>
+        <div class='contact-popup-header'>
+            <h2 id='contact-title'>Contact Us</h2>
+            <button aria-label='Close Contact Form' class='contact-close-btn' onclick='closeContactPopup()' type='button'>&#215;</button>
+        </div>
+        <div class='contact-popup-content'>
+            <p class='lead'>Have a question, suggestion, or feedback? We&#39;d love to hear from you! Fill out the form below, and we&#39;ll get back to you as soon as possible.</p>
+            
+            <div class='contact-info-box' itemscope='itemscope' itemtype='https://schema.org/ContactPoint'>
+                <h5><i aria-hidden='true' class='bi bi-envelope-fill'/> Email</h5>
+                <p><a href='mailto:prepphint@gmail.com' itemprop='email' title='Email PreppHint Support'>prepphint@gmail.com</a></p>
+                <meta content='Customer Service' itemprop='contactType'/>
+            </div>
+            
+            <div class='contact-info-box'>
+                <h5><i aria-hidden='true' class='bi bi-globe'/> Website</h5>
+                <p><a href='https://prepphint.com' rel='noopener noreferrer' target='_blank' title='Visit PreppHint Website'>https://prepphint.com/</a></p>
+            </div>
+            
+            <div class='contact-info-box'>
+                <h5><i aria-hidden='true' class='bi bi-clock-fill'/> Response Time</h5>
+                <p>We try to respond to all inquiries within 24-48 hours.</p>
+            </div>
+            
+            <div style='background: #e8f5f3; padding: 15px; border-radius: 8px; margin-top: 20px;'>
+                <p style='margin: 0; color: #11998e; font-weight: 500;'><i aria-hidden='true' class='bi bi-info-circle-fill' style='margin-right: 8px;'/>For inquiries, please email us directly at <strong><a href='mailto:prepphint@gmail.com' style='color: #11998e;' title='Email PreppHint'>prepphint@gmail.com</a></strong> or use the contact information above.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Popup -->
+    <div aria-hidden='true' class='about-overlay' id='aboutOverlay' onclick='closeAboutPopup()'/>
+    <div aria-labelledby='about-title' aria-modal='true' class='about-popup' id='aboutPopup' role='dialog'>
+        <div class='about-popup-header'>
+            <h2 id='about-title'>About Us</h2>
+            <button aria-label='Close About Us' class='about-close-btn' onclick='closeAboutPopup()' type='button'>&#215;</button>
+        </div>
+        <div class='about-popup-content'>
+            <h3>Our Mission</h3>
+            <p class='lead'><a href='https://PrepHint.com' rel='noopener noreferrer' target='_blank' title='PreppHint Official Website'>PrepHint.com</a> is the place for free browser extensions that make your daily tasks easier. Whether you need to convert files or download YouTube thumbnails, PrepHint has the tools to help you. Our goal is to provide simple, easy-to-use tools without any cost or hassle.</p>
+            
+            <div class='about-founder-section' itemscope='itemscope' itemtype='https://schema.org/Person'>
+                <div class='about-founder-image'>
+                    <img alt='Aman Kumar - Founder and Creator of PreppHint' height='120' itemprop='image' loading='lazy' src='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/images/amureborn.webp' width='120'/>
+                </div>
+                <div class='about-founder-content'>
+                    <h3 itemprop='name'>PrepHint.Com - More About Me! 👋</h3>
+                    <p itemprop='description'>PrepHint was created and is run by <strong itemprop='name'>Aman Kumar</strong>, a developer with a passion for making web apps and Chrome extensions that solve everyday problems. He also loves working on visual effects and 3D modeling, using tools like Blender and Unreal Engine to explore creative projects. His skills help PrepHint grow into a trusted place for online tools that are useful for everyone.</p>
+                    <meta content='Developer' itemprop='jobTitle'/>
+                    <meta content='https://www.linkedin.com/in/amureborn' itemprop='url'/>
+                </div>
+            </div>
+            
+            <p>Right now, PrepHint has a bunch of different tools, the mission is simple: make tools that are free, easy to use, and accessible on any device - whether you&#39;re on a phone, tablet, or computer. Right now, the site offers a growing collection of practical tools, including Volume Master, Adblock for Youtube, Audio Capture, and other handy utilities for everyday tasks. Each tool is designed to be fast, minimal, and user-friendly, so you can get things done without dealing with complex settings.</p>
+            
+            <p>Behind the scenes, PrepHint is constantly evolving with new features and tools. Stay tuned - this is just the beginning.</p>
+            
+            <h3>What&#39;s Next For PrepHint</h3>
+            <p>We&#39;re just getting started! In the future, we plan to add even more tools &#8211; everything from productivity boosters to creative resources. Our mission is to build a platform that covers a wide range of needs, all while staying completely free. Whether it&#39;s a file Converter, Adblocker, or <strong><a href='https://qrcodegenerator.prepphint.com/' rel='noopener noreferrer' target='_blank' title='Free QR Code Generator Tool'>QR Code Generator</a></strong>, PrepHint will be there for you.</p>
+            
+            <p>PrepHint is more than just a bunch of tools &#8211; it&#39;s a community where your ideas matter. As we grow, we invite you to be part of the journey. Whether you&#39;re using our tools or sharing new ideas, you&#39;re helping to make PrepHint even better. Thanks for being part of the PrepHint community!</p>
+            
+            <p>In the future, we plan to add different categories of online tools, making them easily accessible for everyone to use for free. If you have an idea for any online tool, or just want to report a problem, drop us a message on our <strong><a href='#contact' onclick='closeAboutPopup(); openContactPopup(); return false;' title='Contact PreppHint'>Contact Us</a></strong> page.</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script crossorigin='anonymous' defer='defer' integrity='sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz' src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'/>
+    
+    <!-- Load Extensions Data from CDN -->
+    <script defer='defer' src='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/data/extensions.js'/>
+    
+    <!-- Custom JavaScript -->
+    <script defer='defer' src='https://cdn.jsdelivr.net/gh/PreppHint/extenstion@main/assets/js/app.js'/>
+    
+    <!-- Performance monitoring -->
+    <script>
+        window.addEventListener(&#39;load&#39;, function() {
+            if (&#39;performance&#39; in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(&#39;Page load time:&#39;, loadTime + &#39;ms&#39;);
+            }
+        });
+    </script>
+    
+    <!-- Privacy Policy Popup Script -->
+    <script>
+        function openPrivacyPopup() {
+            const popup = document.getElementById(&#39;privacyPopup&#39;);
+            const overlay = document.getElementById(&#39;privacyOverlay&#39;);
+            popup.classList.add(&#39;active&#39;);
+            overlay.classList.add(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            document.body.style.overflow = &#39;hidden&#39;;
+            popup.focus();
+        }
+        
+        function closePrivacyPopup() {
+            const popup = document.getElementById(&#39;privacyPopup&#39;);
+            const overlay = document.getElementById(&#39;privacyOverlay&#39;);
+            popup.classList.remove(&#39;active&#39;);
+            overlay.classList.remove(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            document.body.style.overflow = &#39;auto&#39;;
+        }
+        
+        function openTermsPopup() {
+            const popup = document.getElementById(&#39;termsPopup&#39;);
+            const overlay = document.getElementById(&#39;termsOverlay&#39;);
+            popup.classList.add(&#39;active&#39;);
+            overlay.classList.add(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            document.body.style.overflow = &#39;hidden&#39;;
+            popup.focus();
+        }
+        
+        function closeTermsPopup() {
+            const popup = document.getElementById(&#39;termsPopup&#39;);
+            const overlay = document.getElementById(&#39;termsOverlay&#39;);
+            popup.classList.remove(&#39;active&#39;);
+            overlay.classList.remove(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            document.body.style.overflow = &#39;auto&#39;;
+        }
+        
+        function openContactPopup() {
+            const popup = document.getElementById(&#39;contactPopup&#39;);
+            const overlay = document.getElementById(&#39;contactOverlay&#39;);
+            popup.classList.add(&#39;active&#39;);
+            overlay.classList.add(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            document.body.style.overflow = &#39;hidden&#39;;
+            popup.focus();
+        }
+        
+        function closeContactPopup() {
+            const popup = document.getElementById(&#39;contactPopup&#39;);
+            const overlay = document.getElementById(&#39;contactOverlay&#39;);
+            popup.classList.remove(&#39;active&#39;);
+            overlay.classList.remove(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            document.body.style.overflow = &#39;auto&#39;;
+        }
+        
+        function openAboutPopup() {
+            const popup = document.getElementById(&#39;aboutPopup&#39;);
+            const overlay = document.getElementById(&#39;aboutOverlay&#39;);
+            popup.classList.add(&#39;active&#39;);
+            overlay.classList.add(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
+            document.body.style.overflow = &#39;hidden&#39;;
+            popup.focus();
+        }
+        
+        function closeAboutPopup() {
+            const popup = document.getElementById(&#39;aboutPopup&#39;);
+            const overlay = document.getElementById(&#39;aboutOverlay&#39;);
+            popup.classList.remove(&#39;active&#39;);
+            overlay.classList.remove(&#39;active&#39;);
+            popup.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            overlay.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
+            document.body.style.overflow = &#39;auto&#39;;
+        }
+        
+        // Close popups on Escape key
+        document.addEventListener(&#39;keydown&#39;, function(event) {
+            if (event.key === &#39;Escape&#39;) {
+                closePrivacyPopup();
+                closeTermsPopup();
+                closeContactPopup();
+                closeAboutPopup();
+            }
+        });
+    </script>
+</body>
+</html>
